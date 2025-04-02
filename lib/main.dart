@@ -195,6 +195,42 @@ class _MenuPaesState extends State<MenuPaes> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Icon(
+                  isFavorito ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorito ? Colors.red : Colors.grey,
+                ),
+                onPressed: () => _toggleFavorito(paes),
+              ),
+              IconButton(
+                icon: Icon(Icons.edit, color: Colors.black54),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditarPaesPage(
+                        pao: paes,
+                        onEdit: (updatedPaes) {
+                          setState(() {
+                            paes['nome'] = updatedPaes['nome']!;
+                            paes['preco'] = updatedPaes['preco']!;
+                            paes['detalhes'] = updatedPaes['detalhes']!;
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.delete, color: Colors.black54),
+                onPressed: () => _removerPao(paes),
+              ),
+            ],
+          ),
           Hero(
             tag: paes['imagem']!,
             child: Material(
@@ -271,42 +307,7 @@ class _MenuPaesState extends State<MenuPaes> {
             ),
           ),
           SizedBox(height: 20,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(
-                  isFavorito ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorito ? Colors.red : Colors.grey,
-                ),
-                onPressed: () => _toggleFavorito(paes),
-              ),
-              IconButton(
-                icon: Icon(Icons.edit, color: Colors.black54),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditarPaesPage(
-                        pao: paes,
-                        onEdit: (updatedPaes) {
-                          setState(() {
-                            paes['nome'] = updatedPaes['nome']!;
-                            paes['preco'] = updatedPaes['preco']!;
-                            paes['detalhes'] = updatedPaes['detalhes']!;
-                          });
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.delete, color: Colors.black54),
-                onPressed: () => _removerPao(paes),
-              ),
-            ],
-          ),
+          
         ],
       ),
     );
