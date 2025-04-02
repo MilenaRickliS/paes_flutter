@@ -132,7 +132,7 @@ class _MenuPaesState extends State<MenuPaes> {
             fontWeight: FontWeight.bold,
             fontSize: _fontSize,
           ),
-          child: Text('Panificadora'),
+          child: Text('Panificadora Produtos'),
         ),
         backgroundColor: Color.fromARGB(255, 189, 154, 0),
         centerTitle: true,
