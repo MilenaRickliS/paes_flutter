@@ -62,30 +62,54 @@ class _EditarPaesPageState extends State<EditarPaesPage> {
           key: _formKey,
           child: Column(
             children: [
+              // Validação do Nome
               TextFormField(
                 controller: _nomeController,
                 decoration: InputDecoration(labelText: 'Nome do Produto'),
-                validator: (value) => value!.isEmpty ? 'Informe o nome' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe o nome';
+                  } else if (value.length < 3) {
+                    return 'Nome muito curto, deve ter ao menos 3 caracteres';
+                  }
+                  return null;
+                },
               ),
+              // Validação do Preço
               TextFormField(
                 controller: _precoController,
                 decoration: InputDecoration(labelText: 'Preço'),
-                validator: (value) => value!.isEmpty ? 'Informe o preço' : null,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe o preço';
+                  } else if (double.tryParse(value) == null) {
+                    return 'O preço deve ser um número válido';
+                  }
+                  return null;
+                },
               ),
+              // Validação dos Ingredientes/Descrição
               TextFormField(
                 controller: _ingredientesController,
                 decoration: InputDecoration(labelText: 'Ingredientes e Descrição'),
-                validator: (value) => value!.isEmpty ? 'Informe os ingredientes e a descrição do produto' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe os ingredientes e descrição do produto';
+                  } else if (value.length < 10) {
+                    return 'Descrição muito curta, deve ter ao menos 10 caracteres';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    
                     final updatedPaes = {
                       'nome': _nomeController.text,
                       'preco': _precoController.text,
-                      'imagem': widget.pao['imagem']!,  
+                      'imagem': widget.pao['imagem']!,
                       'detalhes': _ingredientesController.text,
                     };
                     widget.onEdit(updatedPaes); 

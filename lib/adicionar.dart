@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   runApp(NovaPaoPage(onAdd: (Map<String, String> novoPao) {
-  var paes;
-  paes.add(novoPao);
-}));
-
+    var paes = <Map<String, String>>[]; 
+    paes.add(novoPao);
+  }));
 }
 
 class NovaPaoPage extends StatefulWidget {
@@ -36,20 +35,45 @@ class _NovaPaoPageState extends State<NovaPaoPage> {
           key: _formKey,
           child: Column(
             children: [
+              
               TextFormField(
                 controller: _nomeController,
                 decoration: InputDecoration(labelText: 'Nome do Produto'),
-                validator: (value) => value!.isEmpty ? 'Informe o nome' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe o nome';
+                  } else if (value.length < 3) {
+                    return 'Nome muito curto, deve ter ao menos 3 caracteres';
+                  }
+                  return null;
+                },
               ),
+              
               TextFormField(
                 controller: _precoController,
                 decoration: InputDecoration(labelText: 'Preço'),
-                validator: (value) => value!.isEmpty ? 'Informe o preço' : null,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe o preço';
+                  } else if (double.tryParse(value) == null) {
+                    return 'O preço deve ser um número válido';
+                  }
+                  return null;
+                },
               ),
+              
               TextFormField(
                 controller: _ingredientesController,
                 decoration: InputDecoration(labelText: 'Ingredientes e Descrição'),
-                validator: (value) => value!.isEmpty ? 'Informe os ingredientes e descrição do produto' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe os ingredientes e descrição do produto';
+                  } else if (value.length < 10) {
+                    return 'Descrição muito curta, deve ter ao menos 10 caracteres';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -64,7 +88,6 @@ class _NovaPaoPageState extends State<NovaPaoPage> {
                     widget.onAdd(novoPao);
                     Navigator.pop(context);
                   }
-                  
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 72, 41, 30),
@@ -73,12 +96,14 @@ class _NovaPaoPageState extends State<NovaPaoPage> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: Text('Adicionar Produto',
-                style: TextStyle(
+                child: Text(
+                  'Adicionar Produto',
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                  ),),
+                  ),
+                ),
               ),
             ],
           ),
