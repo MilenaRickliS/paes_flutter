@@ -96,6 +96,7 @@ class _MenuPaesState extends State<MenuPaes> {
         ),
         duration: Duration(milliseconds: 300),
       );
+      favoritos.removeWhere((fav) => fav['nome'] == pao['nome']);
     }
   }
 

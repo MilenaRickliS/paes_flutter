@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:paes_flutter/detalhes.dart';
 
-void main(){
-  runApp(const FavoritosPage(favoritos: [],));
+void main() {
+  runApp(const FavoritosPage(favoritos: []));
 }
 
-class FavoritosPage extends StatelessWidget {
+class FavoritosPage extends StatefulWidget {
   final List<Map<String, String>> favoritos;
 
   const FavoritosPage({super.key, required this.favoritos});
+
+  @override
+  _FavoritosPageState createState() => _FavoritosPageState();
+}
+
+class _FavoritosPageState extends State<FavoritosPage> {
+  late List<Map<String, String>> favoritos;
+
+  @override
+  void initState() {
+    super.initState();
+    favoritos = widget.favoritos; 
+  }
+
+  
+  void excluirFavorito(int index) {
+    setState(() {
+      favoritos.removeAt(index); 
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +50,13 @@ class FavoritosPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final paes = favoritos[index];
           return ListTile(
-            
             title: Hero(
-                  tag: 'pao_name_${paes['nome']}',
-                  child: Text(paes['nome']!),
+              tag: 'pao_name_${paes['nome']}',
+              child: Text(paes['nome']!),
             ),
             subtitle: Text('R\$ ${paes['preco']}'),
             leading: Hero(
-              tag: paes['imagem']!, 
+              tag: paes['imagem']!,
               child: Image.asset(paes['imagem']!, width: 50, height: 50, fit: BoxFit.cover),
             ),
             onTap: () {
@@ -48,7 +67,6 @@ class FavoritosPage extends StatelessWidget {
                     return DetalhesPaes(paes: paes);
                   },
                   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    
                     var fadeAnimation = Tween(begin: 0.0, end: 1.0).animate(
                       CurvedAnimation(
                         parent: animation,
@@ -57,10 +75,14 @@ class FavoritosPage extends StatelessWidget {
                     );
                     return FadeTransition(opacity: fadeAnimation, child: child);
                   },
-                  transitionDuration: Duration(seconds: 1), 
+                  transitionDuration: Duration(seconds: 1),
                 ),
               );
             },
+            trailing: IconButton(
+              icon: Icon(Icons.delete, color: Colors.red),
+              onPressed: () => excluirFavorito(index), 
+            ),
           );
         },
       ),
