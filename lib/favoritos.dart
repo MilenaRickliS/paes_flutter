@@ -35,7 +35,7 @@ class FavoritosPage extends StatelessWidget {
                   tag: 'pao_name_${paes['nome']}',
                   child: Text(paes['nome']!),
             ),
-            subtitle: Text(paes['preco']!),
+            subtitle: Text('R\$ ${paes['preco']}'),
             leading: Hero(
               tag: paes['imagem']!, 
               child: Image.asset(paes['imagem']!, width: 50, height: 50, fit: BoxFit.cover),
