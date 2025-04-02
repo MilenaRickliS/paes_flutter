@@ -230,9 +230,14 @@ class _MenuPaesState extends State<MenuPaes> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  paes['preco']!,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  'R\$ ${paes['preco']}',
+                  style: TextStyle(
+                    fontSize: 18, 
+                    fontWeight: FontWeight.bold, 
+                    color: Color.fromARGB(255, 189, 154, 0), 
+                  ),
+                  maxLines: 1, 
+                  overflow: TextOverflow.ellipsis, 
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
