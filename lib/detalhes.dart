@@ -70,7 +70,7 @@ class DetalhesPaes extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 72, 41, 30),
+                  backgroundColor: Color.fromARGB(255, 167, 142, 0),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
