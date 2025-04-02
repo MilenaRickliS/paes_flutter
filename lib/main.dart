@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Color.fromARGB(255, 8, 8, 7),
-        scaffoldBackgroundColor: Color.fromARGB(255, 255, 235, 124),
+        scaffoldBackgroundColor: Color.fromARGB(255, 221, 216, 186),
         fontFamily: 'Raleway',
       ),
       home: MenuPaes(),
@@ -128,13 +128,13 @@ class _MenuPaesState extends State<MenuPaes> {
         title: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: Colors.black,
+            color: const Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,
             fontSize: _fontSize,
           ),
           child: Text('Panificadora'),
         ),
-        backgroundColor: Color.fromARGB(255, 228, 224, 193),
+        backgroundColor: Color.fromARGB(255, 189, 154, 0),
         centerTitle: true,
         actions: [
           IconButton(
