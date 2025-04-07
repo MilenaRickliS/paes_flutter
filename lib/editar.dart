@@ -71,6 +71,8 @@ class _EditarPaesPageState extends State<EditarPaesPage> {
                     return 'Informe o nome';
                   } else if (value.length < 3) {
                     return 'Nome muito curto, deve ter ao menos 3 caracteres';
+                  } else if (!RegExp(r'^[a-zA-Zà-üÀ-Ü\s]+$').hasMatch(value)) {
+                    return 'O nome deve conter apenas letras';
                   }
                   return null;
                 },
